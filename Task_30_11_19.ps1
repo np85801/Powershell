@@ -13,5 +13,5 @@ Add-Content -Path "c:\demo\test.txt" -Value "Hello My First assignment"
 
 # 5) Display Value of %temp%
 Get-PSProvider -PSProvider Environment
-# after we get Drives Name - get its child item by following command
+    # after we get Drives Name - get its child item by following command
 Get-Childitem env:temp
