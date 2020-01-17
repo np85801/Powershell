@@ -1,0 +1,275 @@
+# to know about command (Concept)
+Get-help about_
+
+Get-Help about_Regular_Expressions -ShowWindow
+
+
+#Can see see operators om show window 
+Get-help about_Operators -ShowWindow
+
+# to know about foreach relaed info
+Get-help about_Foreach -ShowWindow
+
+#format of if else 
+if (Conditions)
+{
+#Code Block true
+}
+
+else
+{
+#flse code block
+}
+
+
+
+
+
+
+if (Conditions)
+{
+#Code Block true
+}
+
+elseif (Conditions)
+
+{
+# Code block
+}
+
+elseif (Conditions)
+
+{
+# Code block
+}
+
+else
+{
+#flse code block
+}
+
+
+
+[int]$fn = Read-Host
+[int]$ln = Read-Host
+
+for( $i =$fn ; $i -le $ln ; $i++)
+
+{
+
+    If ($i %2 -eq 0)
+    {
+        Write-Host " $i is even number"
+    }
+
+    else
+    {
+
+        Write-Host " $i is odd Number "
+    }
+
+}
+
+
+"dinesh" -like "din*" 
+
+
+
+$logcontents = Get-Content -Path C:\demo\Logs.log
+
+$logcontents.GetType()
+
+Get-Member -InputObject $logcontentS
+
+foreach($logcontent in $logcontents)
+
+{
+    if($logcontent -like "error*")
+
+    {
+        Write-Host "error occured $logcontent"
+    }
+
+}
+
+
+
+
+Get-Help about_Regular_Expressions -ShowWindow
+
+
+"dinesh" -match "din"
+
+"dinesh" -match "esh"  # because it go through sequence
+
+"dinesh" -match "dins"
+
+"dinesh" -match "din*"
+
+'dinesh' -match '^din'
+
+"dinesh" -match '^esh'
+
+"dinesh" -match "esh$"
+
+
+"ab" -match "^[abc]$"
+
+"ab" -match "^[abc]$"
+
+"ab" -match "^[abc]$"
+
+
+"ab2" -match "^ab[0-9]$"
+
+"ab" -match "^ab[0-9]$"
+
+
+"ab22" -match "^ab[0-9][0-9]$"
+
+"122bdj" -match "^[0-9][0-9][a-z][a-z][a-z]$"
+
+"12bdj" -match "^[0-9][0-9][a-z][a-z][a-z]$"
+
+
+"5687-4253" -match "^[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]$"
+
+
+"56874253" -match "^[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]$"
+
+
+"5687-4253" -match "^[0-9]{4}[-][0-9]{4}$"
+
+"568711-4253" -match "^[0-9]{4}[-][0-9]{4}$"
+
+"5687-4253-4444-5555" -match "^[0-9]{4}[-][0-9]{4}[-][0-9]{4}[-][0-9]{4}$"
+
+"5687-4253-4444-5555" -match "^([0-9]{4}-){3}[0-9]{4}$"
+
+
+
+"Dinesh" -match "Din*"  # atlist oner time n or many time
+
+"Dieshn" -match "Din*"
+
+"Dinesh" -match "Din?"
+
+"Dinnesh" -match "Din?"
+
+"Diesh" -match "Din?"
+
+"Dinesh" -match "Din." #. is single charater wildcard
+
+"Diesh" -match "Din.esh"
+
+"Diesnh" -match "Di.esh"
+
+"Dibesh" -match "Di.esh"
+
+
+
+#KB article from winsowss log
+
+Get-WindowsUpdate
+
+
+
+$logcontents = Get-Content -Path "C:\Windows\Logs\CBS\CBS.log"
+
+$logcontent.GetType()
+
+Get-Member -InputObject $logcontent
+
+foreach($logcontent in $logcontents)
+
+{
+    if($logcontent -match "version\s\d\.\d\.\d{5}\.\d{4}")
+
+    {
+     $logcontent | Out-File "C:\demo\update.txt" -Append
+     $Matches[0] | Out-File "C:\demo\list.txt" -Append
+    }
+
+}
+
+$logcontents
+
+
+
+
+
+
+
+
+$services = Get-Service
+
+foreach( $service in $services)
+
+{
+    if($service.status -eq "runnig")
+
+    {
+        $service | Select-Object -Property dis | Export-Csv -Path C:\demo\services.csv -Delimiter "|"
+    }
+}
+
+
+foreach( $service in $services)
+
+{
+    if($service.Status -eq "Running")
+
+    {
+        "$service.Name", "$service.DisplayName" | Export-Csv -Path C:\demo\services.csv -Delimiter "|" -Append
+    }
+}
+
+
+
+
+
+
+foreach($service in $Services)
+
+{
+    if($service.Status -eq "Running")
+
+    {
+
+    $myout =[PSCustomObject] @{name = $($service.Name) ; displyname = $($service.DisplayName) }
+
+    $myout | Export-Csv -Path C:\demo\services2.csv -Append
+
+    }
+}
+
+
+
+
+
+# Merge and export AD and exchnge contact
+
+$aduser = Import-Csv -Path C:\demo\AD.csv
+$exchangeuser = Import-Csv -Path C:\demo\Exchange.csv
+
+foreach($adu in $aduser) 
+{
+    foreach($Exu in $exchangeuser)
+    {
+        if ($adu.mail -eq $Exu.email)
+
+        {
+       $myout =[PSCustomObject] @{FN=$aduser.FN; email=$exchangeuser.email; Size=$exchangeuser.totalitemSize; DB=$exchangeuser.Database }
+       $myout | Export.csv}
+        
+        }
+    }
+}
+
+
+
+
+
+
+
+
